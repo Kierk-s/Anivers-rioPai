@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para o Melhor Pai do Mundo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --dark-blue: #1e40af;
+            --light-blue: #60a5fa;
+            --accent-gold: #f59e0b;
+            --background-dark: #0f172a;
+            --background-medium: #1e293b;
+            --background-light: #334155;
+            --text-light: #e2e8f0;
+            --text-lighter: #f8fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--background-dark), var(--background-medium), var(--background-light));
+            color: var(--text-lighter);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(30, 58, 138, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent-gold), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .logo i {
+            margin-right: 8px;
+            font-size: 20px;
+            color: var(--accent-gold);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-blue);
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            transition: all 0.4s ease;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--light-blue);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-gold);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--light-blue));
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(30, 58, 138, 0.1) 0%, rgba(30, 64, 175, 0) 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--light-blue), var(--accent-gold), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(30, 58, 138, 0.5);
+            line-height: 1.1;
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #94a3b8;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-lighter);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 36px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-gold));
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.6);
+        }
+
+        /* Contador de Tempo */
+        .time-counter {
+            background: rgba(96, 165, 250, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin: 40px auto;
+            border: 1px solid rgba(30, 58, 138, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 700px;
+            width: 90%;
+        }
+
+        .time-counter h3 {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .counter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .counter-item {
+            background: rgba(30, 58, 138, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            min-width: 120px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(30, 58, 138, 0.3);
+            flex: 1;
+        }
+
+        .counter-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--light-blue), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+
+        .counter-label {
+            font-size: 0.95rem;
+            color: var(--text-lighter);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .distance-message {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .distance-message i {
+            color: var(--accent-gold);
+            margin-right: 8px;
+        }
+
+        /* CSS Art - Floating Stars */
+        .star {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--light-blue));
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: twinkle 4s infinite ease-in-out;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        /* Sections Common Styles */
+        .section {
+            padding: 100px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, var(--light-blue), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-gold));
+            transition: width 0.3s ease;
+        }
+
+        /* Love Letters Section */
+        .love-letters {
+            background: linear-gradient(135deg, var(--background-medium), var(--background-light));
+        }
+
+        .letters-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .letter {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            min-height: 300px;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 58, 138, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(30, 58, 138, 0.3);
+            background: rgba(96, 165, 250, 0.15);
+            border: 1px solid rgba(30, 58, 138, 0.5);
+        }
+
+        .letter h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #94a3b8;
+        }
+
+        .letter p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-lighter);
+        }
+
+        /* Memories Section */
+        .memories {
+            background: linear-gradient(135deg, var(--background-light), var(--background-medium));
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--accent-gold));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+
+        .memory {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 60px;
+        }
+
+        .memory:nth-child(odd) {
+            left: 0;
+        }
+
+        .memory:nth-child(even) {
+            left: 50%;
+        }
+
+        .memory::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--primary-blue));
+            border: 4px solid var(--background-dark);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .memory:nth-child(odd)::after {
+            right: -17px;
+        }
+
+        .memory:nth-child(even)::after {
+            left: -17px;
+        }
+
+        .memory-content {
+            padding: 25px;
+            background: rgba(96, 165, 250, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(30, 58, 138, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .memory-content:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .memory-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #94a3b8;
+        }
+
+        .memory-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-lighter);
+        }
+
+        /* INTERACTIVE CLASSROOM - Converted from Workshop */
+        .classroom {
+            background: linear-gradient(135deg, var(--background-dark), var(--background-medium));
+            text-align: center;
+            min-height: 600px;
+            padding-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .classroom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(96, 165, 250, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 30%, rgba(245, 158, 11, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(96, 165, 250, 0.05) 0%, transparent 25%);
+            z-index: 0;
+        }
+        
+        .classroom-intro {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--text-lighter);
+            position: relative;
+            z-index: 2;
+        }
+
+        .classroom-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(30, 58, 138, 0.3);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .chalkboard {
+            position: absolute;
+            top: 20px;
+            left: 10%;
+            width: 80%;
+            height: 180px;
+            background: linear-gradient(135deg, #1a472a, #166534);
+            border-radius: 10px;
+            border: 8px solid #8b4513;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .teacher-desk {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to top, #8b4513, #a0522d);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .materials-row {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: flex-end;
+            padding: 0 50px;
+            z-index: 10;
+        }
+
+        .material {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            transform-origin: bottom center;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 3rem;
+            color: var(--accent-gold);
+        }
+
+        .material:hover {
+            transform: scale(1.15) translateY(-8px);
+            filter: brightness(1.3) drop-shadow(0 5px 15px rgba(245, 158, 11, 0.5));
+        }
+
+        .material:active {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .message-bubble {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+            color: #94a3b8;
+            padding: 20px 25px;
+            border-radius: 20px;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            max-width: 300px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.5;
+            z-index: 10000;
+            opacity: 0;
+            transform: translateY(30px) scale(0.8);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            backdrop-filter: blur(15px);
+            border-image: linear-gradient(45deg, var(--accent-gold), var(--primary-blue)) 1;
+        }
+
+        .message-bubble.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .message-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: var(--accent-gold) transparent transparent;
+        }
+
+        .floating-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-star {
+            position: absolute;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            opacity: 0.6;
+            animation: float-up 8s linear infinite;
+        }
+
+        .spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #f59e0b;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 2px #f59e0b;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        /* Music Section */
+        .music-section {
+            background: linear-gradient(135deg, var(--background-light), var(--background-medium));
+            text-align: center;
+        }
+
+        .music-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .music-player {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(30, 58, 138, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .player-header i {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+        }
+
+        .player-header h3 {
+            font-size: 2rem;
+            color: #fff;
+            background: linear-gradient(45deg, var(--accent-gold), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .playlist-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .song-card {
+            background: rgba(30, 58, 138, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(30, 58, 138, 0.3);
+            cursor: pointer;
+        }
+
+        .song-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+            border: 1px solid rgba(245, 158, 11, 0.5);
+        }
+
+        .song-cover {
+            width: 100%;
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .song-cover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(30, 58, 138, 0.1), rgba(245, 158, 11, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .song-card:hover .song-cover::after {
+            opacity: 1;
+        }
+
+        .song-info {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .song-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #fff;
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+
+        .song-artist {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 30px 30px;
+            background: #0f172a;
+            text-align: center;
+            border-top: 1px solid rgba(30, 58, 138, 0.3);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-lighter);
+            margin-bottom: 30px;
+        }
+
+        .signature {
+            font-size: 2rem;
+            color: #94a3b8;
+            margin-top: 30px;
+            font-style: italic;
+            background: linear-gradient(45deg, var(--light-blue), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .copyright {
+            margin-top: 40px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-150px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes sway {
+            0%, 100% {
+                transform: rotate(-2deg);
+            }
+            50% {
+                transform: rotate(2deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.8rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.4s ease;
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.7rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .memory {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .memory:nth-child(even) {
+                left: 0;
+            }
+            
+            .memory::after {
+                left: 18px !important;
+            }
+            
+            .counter-container {
+                gap: 10px;
+            }
+            
+            .counter-item {
+                min-width: calc(50% - 20px);
+                padding: 10px;
+            }
+            
+            .counter-value {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 80px 20px;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .classroom-container {
+                height: 400px;
+            }
+            
+            .materials-row {
+                padding: 0 15px;
+            }
+            
+            .material {
+                font-size: 2rem;
+            }
+            
+            .playlist-container {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 15px;
+            }
+            
+            .song-cover {
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo"><i class="fas fa-graduation-cap"></i>Homenagem ao Papai</div>
+        <button class="nav-toggle" aria-label="Abrir menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#counter">Anos como Pai</a></li>
+                <li><a href="#letters">Mensagens</a></li>
+                <li><a href="#memories">Trajetória</a></li>
+                <li><a href="#classroom">Sala de Aula</a></li>
+                <li><a href="#music">Música</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <!-- Floating stars background -->
+        <div class="star" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="star" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+        <div class="star" style="top: 40%; left: 30%; animation-delay: 2s;"></div>
+        <div class="star" style="top: 60%; left: 70%; animation-delay: 3s;"></div>
+        <div class="star" style="top: 80%; left: 20%; animation-delay: 4s;"></div>
+        <div class="star" style="top: 30%; left: 50%; animation-delay: 5s;"></div>
+        
+        <div class="hero-content">
+            <h1>Para o Melhor Pai do Mundo</h1>
+            <h2>Nosso Herói, Nosso Exemplo</h2>
+            <p>Pai, você é nossa fonte de força, sabedoria e amor incondicional. Cada ensinamento seu moldou quem somos hoje. Esta homenagem é uma pequena forma de dizer o quanto você significa para nós.</p>
+            
+            <div class="cta-container">
+                <a href="#counter" class="cta-button">Ver Sua História</a>
+                <a href="#music" class="cta-button"><i class="fas fa-music"></i> Suas Músicas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Time Counter Section -->
+    <section class="section">
+        <div class="time-counter" id="counter">
+            <h3><i class="fas fa-birthday-cake"></i> Celebrando seu tempo como Pai</h3>
+            <div class="counter-container">
+                <div class="counter-item">
+                    <div class="counter-value" id="years">0</div>
+                    <div class="counter-label">Anos</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="months">0</div>
+                    <div class="counter-label">Meses</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="days">0</div>
+                    <div class="counter-label">Dias</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="hours">0</div>
+                    <div class="counter-label">Horas</div>
+                </div>
+            </div>
+            
+            <div class="distance-message">
+                <i class="fas fa-heart"></i>
+                 Cada ano, mês, dia e hora da sua vida tem sido um presente para nossa família. Sua presença torna tudo mais especial e significativo.
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Letters Section -->
+    <section class="section love-letters" id="letters">
+        <h2 class="section-title">Mensagens de Gratidão</h2>
+        <div class="letters-container">
+            <div class="letter">
+                <h3>Nosso Herói</h3>
+                <p>Pai, você sempre foi nosso super-herói sem capa. Sua força não está apenas nos músculos, mas no coração gigante que carrega nossa família. Cada desafio que você enfrentou por nós, cada sacrifício silencioso, cada noite mal dormida pensando no nosso futuro - tudo isso fez de você o homem extraordinário que admiramos. Obrigado por ser nosso exemplo de coragem, determinação e amor incondicional.</p>
+            </div>
+            <div class="letter">
+                <h3>Mestre dos Ensinamentos</h3>
+                <p>Suas lições vão muito além das palavras. Você nos ensinou através do exemplo: como ser honesto mesmo quando é difícil, como trabalhar com dedicação, como tratar as pessoas com respeito. Cada conversa sua é uma aula de vida que guardamos no coração. Você tem o dom de transformar momentos simples em memórias preciosas, e seus conselhos são tesouros que levaremos para sempre conosco.</p>
+            </div>
+            <div class="letter">
+                <h3>Pilar da Família</h3>
+                <p>Você é a base sólida sobre a qual nossa família se apoia. Nos momentos de tempestade, você é nosso abrigo. Nas alegrias, você é quem mais vibra conosco. Sua presença traz segurança e paz ao nosso lar. Obrigado por ser esse homem íntegro, carinhoso e dedicado que faz questão de estar presente em cada momento importante das nossas vidas. Você é nosso orgulho e nossa inspiração diária.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Father's Day Poems Section -->
+    <section class="section memories" id="memories">
+        <h2 class="section-title">Poemas para o Dia dos Pais</h2>
+        <div class="timeline">
+            <div class="memory">
+                <div class="memory-content">
+                    <h3>Meu Primeiro Herói</h3>
+                    <p>
+                        Pai, meu porto e meu chão,  
+                        força e abrigo em cada estação.  
+                        Com seu exemplo, aprendi a lutar,  
+                        e com seu amor, aprendi a amar.  
+                    </p>
+                </div>
+            </div>
+            <div class="memory">
+                <div class="memory-content">
+                    <h3>O Abraço que Acolhe</h3>
+                    <p>
+                        No seu abraço, o medo se vai,  
+                        nele encontro paz, encontro meu pai.  
+                        Um gesto simples, mas tão profundo,  
+                        que me protege de todo o mundo.  
+                    </p>
+                </div>
+            </div>
+            <div class="memory">
+                <div class="memory-content">
+                    <h3>O Exemplo</h3>
+                    <p>
+                        Seu jeito ensina, mesmo sem falar,  
+                        que honestidade é o melhor lugar.  
+                        Pai, você é estrada e é farol,  
+                        minha inspiração, meu maior sol.  
+                    </p>
+                </div>
+            </div>
+            <div class="memory">
+                <div class="memory-content">
+                    <h3>Gratidão de Filho</h3>
+                    <p>
+                        Hoje celebro quem sempre cuidou,  
+                        quem me guiou e quem me amou.  
+                        Pai, meu amigo, meu bem maior,  
+                        te agradeço por ser quem é, e por tudo que for.  
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Interactive Classroom -->
+    <section class="section classroom" id="classroom">
+        <h2 class="section-title">Sala de Aula do Professor Papai</h2>
+        <p class="classroom-intro">📚 <strong>Clique nos materiais pedagógicos</strong> para descobrir mensagens especiais sobre suas qualidades como pai! Cada item representa uma característica única que admiramos em você como pai e pedagogo. 👨‍🏫</p>
+        
+        <div class="classroom-container">
+            <div class="chalkboard">
+                "A educação é a arma mais poderosa que você pode usar para mudar o mundo. E você, pai, mudou o nosso mundo todos os dias."
+            </div>
+            <div class="teacher-desk"></div>
+            <div class="materials-row" id="materials-row">
+                <!-- Materials will be generated by JavaScript -->
+            </div>
+            <div class="floating-stars" id="floating-stars"></div>
+        </div>
+    </section>
+
+    <!-- Music Section -->
+    <section class="section music-section" id="music">
+        <h2 class="section-title">Trilha Sonora dos Pais</h2>
+        
+        <div class="music-container">
+            <div class="music-player">
+                <div class="player-header">
+                    <i class="fas fa-music"></i>
+                    <h3>Músicas que Lembram de Você</h3>
+                </div>
+                <p>Canções que tocam nosso coração quando pensamos no melhor pai e educador do mundo. Cada música conta um pouco da nossa história juntos.</p>
+                
+                <div class="playlist-container">
+                    <div class="song-card">
+                        <div class="song-cover" style="background-image: url('https://i.scdn.co/image/ab67616d0000b27334362676667a4322838ccc97');" aria-label="Capa do álbum Pai Herói"></div>
+                        <div class="song-info">
+                            <div class="song-title">Pai Herói</div>
+                            <div class="song-artist">Daniel</div>
+                        </div>
+                    </div>
+                    
+                    <div class="song-card">
+                        <div class="song-cover" style="background-image: url('https://i.scdn.co/image/ab67616d0000b273a7b2157f7fb2de8fb4fc2ad2');" aria-label="Capa do álbum Coração de Pai"></div>
+                        <div class="song-info">
+                            <div class="song-title">Coração de Pai</div>
+                            <div class="song-artist">Leonardo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="song-card">
+                        <div class="song-cover" style="background-image: url('https://i.scdn.co/image/ab67616d0000b273d7bb3f12e0849bcd79c4edd8');" aria-label="Capa do álbum Pais e Filhos"></div>
+                        <div class="song-info">
+                            <div class="song-title">Pais e Filhos</div>
+                            <div class="song-artist">Legião Urbana</div>
+                        </div>
+                    </div>
+                    
+                    <div class="song-card">
+                        <div class="song-cover" style="background-image: url('https://i.scdn.co/image/ab67616d0000b273f6b55ca93bd33211227b502b');" aria-label="Capa do álbum Eu e Meu Pai"></div>
+                        <div class="song-info">
+                            <div class="song-title">Eu e Meu Pai</div>
+                            <div class="song-artist">Chrystian & Ralf</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="distance-message" style="max-width: 600px;">
+                <i class="fas fa-headphones"></i>
+                Estas são as canções que tocam quando lembramos de você, pai. Cada melodia traz memórias especiais dos momentos que vivemos juntos.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Pai, seu amor é o alicerce da nossa família e sua sabedoria é a luz que nos guia. Cada dia ao seu lado é um aprendizado e uma bênção que agradecemos.</p>
+            <p>Prometo honrar seus ensinamentos, seguir seus exemplos de dedicação à educação e fazer você se orgulhar sempre. Você é nosso herói, nosso primeiro professor e o homem mais importante das nossas vidas.</p>
+            
+            <div class="signature">Com todo amor e admiração</div>
+            <div class="copyright">© 2025 - Uma homenagem especial ao melhor pai e educador do mundo</div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate stars in background
+            const body = document.querySelector('body');
+            
+            for (let i = 0; i < 25; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = (Math.random() * 15 + 10) + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 6 + 's';
+                star.style.opacity = Math.random() * 0.4 + 0.2;
+                body.appendChild(star);
+            }
+            
+            // Create interactive classroom
+            function createClassroom() {
+                const materialsRow = document.getElementById('materials-row');
+                const floatingStars = document.getElementById('floating-stars');
+                const classroom = document.querySelector('.classroom-container');
+                
+                if (!materialsRow || !floatingStars || !classroom) return;
+                
+                materialsRow.innerHTML = '';
+                
+                const messages = [
+                    "Pai, sua presença é farol: mesmo na tempestade, sei para onde voltar.",
+                    "Sua força não está apenas nas mãos, mas no coração que carrega nossa família",
+                    "Com você aprendemos que todo conhecimento é uma semente que germina no coração",
+                    "Você é o mentor dos nossos sonhos e o construtor do nosso futuro",
+                    "Você transforma dias comuns em lembranças eternas.",
+                    "Com você aprendemos que todo problema tem solução quando há dedicação.",
+                    "Seu abraço é o lugar mais seguro que conheço."
+                ];
+                
+                const materials = [
+                    'fas fa-book-open',
+                    'fas fa-pencil-alt',
+                    'fas fa-calculator',
+                    'fas fa-globe-americas',
+                    'fas fa-graduation-cap',
+                    'fas fa-chalkboard-teacher',
+                    'fas fa-apple-alt'
+                ];
+                
+                // Create 7 materials
+                for (let i = 0; i < 7; i++) {
+                    const material = document.createElement('div');
+                    material.classList.add('material');
+                    material.dataset.index = i;
+                    material.innerHTML = `<i class="${materials[i]}"></i>`;
+                    
+                    // Add swaying animation
+                    material.style.animation = `sway ${3 + Math.random() * 2}s infinite ease-in-out`;
+                    material.style.animationDelay = `${Math.random() * 2}s`;
+                    
+                    // Add click event
+                    material.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const index = parseInt(this.dataset.index);
+                        const message = messages[index % messages.length];
+                        
+                        // Remove existing message bubbles
+                        document.querySelectorAll('.message-bubble').forEach(bubble => bubble.remove());
+                        
+                        // Create message bubble
+                        const messageBubble = document.createElement('div');
+                        messageBubble.classList.add('message-bubble');
+                        messageBubble.textContent = message;
+                        
+                        // Position bubble
+                        const classroomRect = classroom.getBoundingClientRect();
+                        const materialRect = this.getBoundingClientRect();
+                        const scrollY = window.scrollY || document.documentElement.scrollTop;
+                        
+                        const bubbleLeft = Math.max(20, Math.min(window.innerWidth - 320, materialRect.left + materialRect.width/2 - 150));
+                        const bubbleTop = materialRect.top + scrollY - 140;
+                        
+                        messageBubble.style.position = 'absolute';
+                        messageBubble.style.left = bubbleLeft + 'px';
+                        messageBubble.style.top = bubbleTop + 'px';
+                        messageBubble.style.zIndex = '10000';
+                        
+                        document.body.appendChild(messageBubble);
+                        
+                        // Show message
+                        setTimeout(() => {
+                            messageBubble.classList.add('visible');
+                        }, 50);
+                        
+                        // Hide message after 5 seconds
+                        setTimeout(() => {
+                            messageBubble.classList.remove('visible');
+                            setTimeout(() => {
+                                if (messageBubble.parentNode) {
+                                    messageBubble.remove();
+                                }
+                            }, 500);
+                        }, 5000);
+                        
+                        // Create floating star effect
+                        for (let k = 0; k < 3; k++) {
+                            setTimeout(() => {
+                                const star = document.createElement('div');
+                                star.classList.add('floating-star');
+                                star.innerHTML = '<i class="fas fa-star"></i>';
+                                star.style.left = `${materialRect.left + materialRect.width/2 + (Math.random() - 0.5) * 50}px`;
+                                star.style.top = `${materialRect.top + scrollY}px`;
+                                star.style.position = 'absolute';
+                                star.style.pointerEvents = 'none';
+                                star.style.zIndex = '999';
+                                
+                                document.body.appendChild(star);
+                                
+                                setTimeout(() => {
+                                    if (star.parentNode) {
+                                        star.remove();
+                                    }
+                                }, 8000);
+                            }, k * 200);
+                        }
+                    });
+                    
+                    materialsRow.appendChild(material);
+                }
+                
+                // Add background floating stars
+                for (let i = 0; i < 10; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('floating-star');
+                    star.innerHTML = '<i class="fas fa-star"></i>';
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.animationDelay = `${Math.random() * 15}s`;
+                    star.style.fontSize = `${0.8 + Math.random() * 1}rem`;
+                    star.style.opacity = `${0.3 + Math.random() * 0.4}`;
+                    
+                    floatingStars.appendChild(star);
+                }
+                
+                // Add sparks
+                for (let i = 0; i < 6; i++) {
+                    const spark = document.createElement('div');
+                    spark.classList.add('spark');
+                    spark.style.left = `${Math.random() * 100}%`;
+                    spark.style.top = `${30 + Math.random() * 40}%`;
+                    spark.style.animationDelay = `${Math.random() * 3}s`;
+                    
+                    classroom.appendChild(spark);
+                }
+            }
+            
+            // Initialize classroom
+            createClassroom();
+            
+            // Mobile menu toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('nav ul');
+            
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    navToggle.innerHTML = navMenu.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                document.querySelectorAll('nav ul li a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                        navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+            }
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Life counter (assuming father's birth date)
+            const birthDate = new Date('1992-09-01T00:00:00'); // Change this to actual birth date
+            
+            function updateCounter() {
+                const now = new Date();
+                let diff = now - birthDate;
+                
+                if (diff < 0) {
+                    ['years', 'months', 'days', 'hours'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.textContent = '0';
+                    });
+                    return;
+                }
+                
+                const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+                const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+                const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                
+                const yearsEl = document.getElementById('years');
+                const monthsEl = document.getElementById('months');
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                
+                if (yearsEl) yearsEl.textContent = years;
+                if (monthsEl) monthsEl.textContent = months;
+                if (daysEl) daysEl.textContent = days;
+                if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+            }
+            
+            updateCounter();
+            setInterval(updateCounter, 3600000); // Update every hour
+            
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                const backToTop = document.querySelector('.back-to-top');
+                
+                if (header) {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                }
+                
+                if (backToTop) {
+                    if (window.scrollY > 300) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                }
+            });
+            
+            // Back to top functionality
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (backToTopButton) {
+                backToTopButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // Animation on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.letter, .memory-content, .song-card');
+                
+                elements.forEach(el => {
+                    const elementTop = el.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        el.style.animation = 'fadeIn 0.8s ease forwards';
+                    }
+                });
+            };
+            
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
